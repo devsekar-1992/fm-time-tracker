@@ -28,7 +28,7 @@ body {
 }
 ul {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     padding: 1em;
 }
 ul li {
@@ -36,7 +36,11 @@ ul li {
 }
 a{
     text-decoration: none;
+    color: var(--desature-blue);
 }
+.active, .btn:hover {
+    color: white;
+  }
 .main{
     width: 960px;
     margin: 0 auto;
