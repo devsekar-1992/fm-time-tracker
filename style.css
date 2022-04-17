@@ -42,23 +42,21 @@ a{
     color: white;
   }
 .main{
-    width: 960px;
+    width: 400px;
     margin: 0 auto;
     height: 95vh;
 }
 .grid-section{
     display: grid;
-    grid-template-columns: repeat(3,1fr);
-    justify-content: center;
-    align-items: center;
+    grid-template-columns: repeat(1,1fr);  
 }
 .box{
     width: 350px;
-    background-color: var(--dark-blue);
     border-radius: 20px;
+    margin: 1em;
 }
 .report-for{
-    padding: 2em;
+    padding: 0.5em;
     background-color: var(--blue);
     display: flex;
     justify-content: center;
@@ -79,4 +77,42 @@ a{
 .make-small{
     font-size: 1rem;
     font-weight: 100;
+}
+.bg-label-main{
+    background-color: var(--dark-blue);
+}
+.bg-label-work{
+    background-color: var(--light-red-work);
+}
+.bg-label-play{
+    background-color: var(--soft-blue-play);
+}
+.bg-label-study{
+    background-color: var(--light-red-study);
+}
+.bg-label-ex{
+    background-color: var(--lime-green-exercise);
+}
+.bg-label-social{
+    background-color: var(--violet-social);
+}
+.bg-label-sc{
+    background-color: var(--soft-orange-sc);
+}
+.time-material-img{
+    text-align: right;
+    position: relative;
+    left: 11em;
+    width: 65px;
+    height: 65px;
+}
+.time-frame-content{
+    margin-top: -1.45em;
+    position: relative;
+    padding: 1em;
+    background-color: var(--dark-blue);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-radius: 20px;
 }
