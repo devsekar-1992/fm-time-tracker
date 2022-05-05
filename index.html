@@ -27,10 +27,10 @@
           </div>
           <ul id="time_track_box">
             <li>
-              <a class="time-link" href="#" ref="daily">Daily</a>
+              <a class="time-link " href="#" ref="daily">Daily</a>
             </li>
             <li>
-              <a class="time-link" href="#" data-ref="weekly">Weekly</a>
+              <a class="time-link active" href="#" data-ref="weekly">Weekly</a>
             </li>
             <li>
               <a class="time-link" href="#" data-ref="month">Monthly</a>
@@ -40,124 +40,45 @@
         <div class="box bg-label-work">
             <img src="images/icon-work.svg" alt="" class="time-material-img">
           <div class="time-frame-content">
-            <div>
-              <h6>
-                Work
-              </h6>
-              <p>
-                32 hrs
-              </p>
-            </div>
-            <div>
-              <img src="images/icon-ellipsis.svg" alt="ellipsis">
-              <p>
-                Last Week - 36hrs
-              </p>
-            </div>
+            
           </div>
         </div>
         <div class="box bg-label-play">
             <img src="images/icon-play.svg" alt="" class="time-material-img">
             <div class="time-frame-content">
-              <div>
-                <h6>
-                  Work
-                </h6>
-                <p>
-                  32 hrs
-                </p>
-              </div>
-              <div>
-                <img src="images/icon-ellipsis.svg" alt="ellipsis">
-                <p>
-                  Last Week - 36hrs
-                </p>
-              </div>
+             
             </div>
         </div>
         <div class="box bg-label-study">
             <img src="images/icon-study.svg" alt="" class="time-material-img">
             <div class="time-frame-content">
-              <div>
-                <h6>
-                  Work
-                </h6>
-                <p>
-                  32 hrs
-                </p>
-              </div>
-              <div>
-                <img src="images/icon-ellipsis.svg" alt="ellipsis">
-                <p>
-                  Last Week - 36hrs
-                </p>
-              </div>
+              
             </div>
         </div>
         <div class="box bg-label-ex">
             <img src="images/icon-exercise.svg" alt="" class="time-material-img">
             <div class="time-frame-content">
-              <div>
-                <h6>
-                  Work
-                </h6>
-                <p>
-                  32 hrs
-                </p>
-              </div>
-              <div>
-                <img src="images/icon-ellipsis.svg" alt="ellipsis">
-                <p>
-                  Last Week - 36hrs
-                </p>
-              </div>
+              
             </div>
         </div>
         <div class="box bg-label-social">
             <img src="images/icon-social.svg" alt="" class="time-material-img">
             <div class="time-frame-content">
-              <div>
-                <h6>
-                  Work
-                </h6>
-                <p>
-                  32 hrs
-                </p>
-              </div>
-              <div>
-                <img src="images/icon-ellipsis.svg" alt="ellipsis">
-                <p>
-                  Last Week - 36hrs
-                </p>
-              </div>
+             
             </div>
         </div>
         <div class="box bg-label-sc">
             <img src="images/icon-self-care.svg" alt="" class="time-material-img">
             <div class="time-frame-content">
-              <div>
-                <h6>
-                  Work
-                </h6>
-                <p>
-                  32 hrs
-                </p>
-              </div>
-              <div>
-                <img src="images/icon-ellipsis.svg" alt="ellipsis">
-                <p>
-                  Last Week - 36hrs
-                </p>
-              </div>
             </div>
         </div>
       </section>
     </main>
 
-    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script type="text/javascript">
       const response = "";
-
+      loadData('weekly');
       let aContainer = document.getElementById("time_track_box");
       let links = aContainer.getElementsByClassName("time-link");
       for (var i = 0; i < links.length; i++) {
@@ -167,18 +88,63 @@
             current[0].className = current[0].className.replace(" active", "");
           }
           this.className += " active";
-          let searchString = this.innerText.toLowerCase();
+          let searchString = this.innerText.toLowerCase() ?? 'daily';
+          loadData(searchString);
+          
+        });
+      }
+      function loadData(searchString){
+        let titleMapper=[
+            {
+              "title":"Work",
+              "class":"bg-label-work"
+            },
+            {
+              "title":"Play",
+              "class":"bg-label-play"
+            },
+            {
+              "title":"Study",
+              "class":"bg-label-study"
+            },
+            {
+              "title":"Exercise",
+              "class":"bg-label-ex"
+            },
+           {
+             "title":"Self Care",
+             "class":"bg-label-sc"
+           } ,
+           {
+             "title":"Social",
+             "class":"bg-label-social"
+           }
+          ];
           let d = fetch("./data.json")
             .then((response) => {
               return response.json();
             })
             .then((data) => {
-              data.map((result)=>{
-                console.log(result['timeframes'][searchString]);
+              titleMapper.map((result)=>{
+                let mainData=data.find(e=>e['title']===result['title']);
+                let content=`<div>
+                <h6>
+                  ${mainData['title']}
+                </h6>
+                <p>
+                  ${mainData['timeframes'][searchString]['current']}hrs
+                </p>
+              </div>
+              <div>
+                <img src="images/icon-ellipsis.svg" alt="ellipsis">
+                <p>
+                  Last Week - ${mainData['timeframes'][searchString]['previous']} hrs
+                </p>
+              </div>`;
+                $('.'+result['class']).find('.time-frame-content').html(content);
               });
               return data;
             });
-        });
       }
     </script>
   </body>
