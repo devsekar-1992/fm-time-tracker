@@ -127,17 +127,19 @@
             .then((data) => {
               titleMapper.map((result)=>{
                 let mainData=data.find(e=>e['title']===result['title']);
-                let content=`<div>
+                let content=`<div class='status-box'>
                 <h6>
                   ${mainData['title']}
                 </h6>
-                <p>
+
+                <p class='current-status'>
                   ${mainData['timeframes'][searchString]['current']}hrs
                 </p>
+                
               </div>
-              <div>
-                <img src="images/icon-ellipsis.svg" alt="ellipsis">
-                <p>
+              <div class='status-box'>
+                <img src="images/icon-ellipsis.svg" alt="ellipsis" class='ellipsis'>
+                <p class='previous-status'>
                   Last Week - ${mainData['timeframes'][searchString]['previous']} hrs
                 </p>
               </div>`;

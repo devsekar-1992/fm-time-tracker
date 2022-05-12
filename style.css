@@ -109,10 +109,33 @@ a{
 .time-frame-content{
     margin-top: -1.45em;
     position: relative;
-    padding: 1em;
+    padding: 2em;
     background-color: var(--dark-blue);
     display: flex;
     justify-content: space-between;
     align-items: baseline;
     border-radius: 20px;
+}
+.previous-status{
+    font-size: 1rem;
+}
+.ellipsis{
+    position: relative;
+    left: 4.5em;
+    bottom: 0.5em;
+    max-width: 21px;
+}
+.current-status{
+    font-size: 2rem;
+}
+.status-box{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+@media screen and (max-height:1440px) {
+.grid-section{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);  
+}
 }
